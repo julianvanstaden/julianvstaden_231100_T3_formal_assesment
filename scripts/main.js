@@ -101,3 +101,7 @@ $("#plantsContainer").on('click', '.card', function(){
 
 });
 
+
+$(document).on('click', 'button.deleteRow', function(event) {
+  $(this).closest("tr").remove();
+});
