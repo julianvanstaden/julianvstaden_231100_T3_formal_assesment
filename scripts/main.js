@@ -7,31 +7,36 @@ const plants = [
     "name": "Fikus Tree",
     "price": 350,
     "description": "Graceful and lush, this charming indoor plant boasts glossy, emerald-green leaves that effortlessly brighten any space.",
-    "image": "plant1.png"
+    "image": "plant1.png",
+    onSale: true
   },
   {
     "name": "White Sprite Succulent",
     "price": 200,
     "description": "Delicate and captivating, this rare succulent showcases a mesmerizing silver-white hue that gracefully adorns its petite, fleshy leaves.",
-    "image": "plant2.png"
+    "image": "plant2.png",
+    onSale: false
   },
   {
     "name": "Snake Plant",
     "price": 400,
     "description": "Boasting tall, sleek, and sword-like leaves, this botanical marvel adds a touch of modern flair to any setting.",
-    "image": "plant3.png"
+    "image": "plant3.png",
+    onSale: true
   },
   {
     "name": "Parlour Palm",
     "price": 350,
     "description": "With its lush, feather-like fronds and compact size, this indoor beauty makes a striking addition to any interior space.",
-    "image": "plant4.png"
+    "image": "plant4.png",
+    onSale: false
   },
   {
     "name": "Japanese Maple",
     "price": 1200,
     "description": "Known for its stunning foliage that transforms with the seasons, this ornamental tree captivates with its delicate, lacy leaves in vibrant shades of red, orange, or gold.",
-    "image": "plant5.png"
+    "image": "plant5.png",
+    onSale: true
   }
 ];
 
@@ -105,3 +110,30 @@ $("#plantsContainer").on('click', '.card', function(){
 $(document).on('click', 'button.deleteRow', function(event) {
   $(this).closest("tr").remove();
 });
+
+const plantList = document.getElementById("plantList");
+const onSaleButton = document.getElementById("onSaleButton");
+const alphabeticalButton = document.getElementById("alphabeticalButton");
+
+function renderPlants(plantArray) {
+  plantList.innerHTML = "";
+  plantArray.forEach(plant => {
+      const plantCard = document.createElement("div");
+      plantCard.className = "plant-card";
+      plantCard.textContent = plant.name + (plant.onSale ? " (On Sale)" : "");
+      plantList.appendChild(plantCard);
+  });
+}
+
+onSaleButton.addEventListener("click", () => {
+  const onSalePlants = plants.filter(plant => plant.onSale);
+  renderPlants(onSalePlants);
+});
+
+alphabeticalButton.addEventListener("click", () => {
+  const sortedPlants = [...plants].sort((a, b) => a.name.localeCompare(b.name));
+  renderPlants(sortedPlants);
+});
+
+// Initial rendering
+renderPlants(plants);

@@ -124,3 +124,11 @@ button {
     margin-top: 100px;
     margin-left: 80px;
 }
+
+.filter-container {
+    margin: 20px;
+}
+
+button {
+    margin-right: 10px;
+}
